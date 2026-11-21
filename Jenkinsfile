@@ -24,7 +24,7 @@ pipeline {
           }
         stage('OWASP Dependency Check') {
           steps {
-            dependencyCheck additionalArguments: '--scan . --format ALL --out dependency-check-report', odcInstallation: 'dependency-check-13',  nvdCredentialsId: 'OWASP'
+            dependencyCheck additionalArguments: '--scan . --format ALL --out .', odcInstallation: 'dependency-check-13',  nvdCredentialsId: 'OWASP'
                 }
           }
       }
