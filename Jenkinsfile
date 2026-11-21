@@ -5,13 +5,15 @@ pipeline {
   }
   stages {
     stage('Version Check') {
-      sh '''
-        node -v
-        npm -v
-      '''
+      steps {
+        sh 'node -v'
+        sh 'npm -v'
+      }
     }
     stage('Install Dependencies') {
-      sh 'npm install --no-audit'
+      steps {
+        sh 'npm install --no-audit'
+      }
     }
   }
 }
