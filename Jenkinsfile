@@ -15,9 +15,18 @@ pipeline {
         sh 'npm install --no-audit'
       }
     }
-    stage('NPM Audit') {
-      steps {
-        sh 'npm audit --audit-level=critical'
+    stage('Dependencies Check') {
+      parallel {
+        stage('NPM Audit') {
+          steps {
+              sh 'npm audit --audit-level=critical'
+              }
+          }
+        stage('OWASP Dependency Check') {
+          steps {
+            dependencyCheck additionalArguments: '--scan . --format ALL --out dependency-check-report', odcInstallation: 'dependency-check-1',  nvdCredentialsId: 'OWASP'
+                }
+          }
       }
     }
   }
